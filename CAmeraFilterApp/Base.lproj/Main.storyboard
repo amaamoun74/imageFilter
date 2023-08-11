@@ -45,7 +45,7 @@
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="qjL-tx-OoT">
                             <connections>
                                 <action selector="addImage:" destination="BYZ-38-t0r" id="iah-BH-BpJ"/>
-                                <segue destination="QgA-ze-9sD" kind="show" id="Xb4-XP-1Qc"/>
+                                <segue destination="QgA-ze-9sD" kind="show" id="f6U-wL-jKZ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -112,7 +112,7 @@
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="5Yp-ep-VKf" customClass="ImageCollectionViewCell" customModule="CAmeraFilterApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="150" height="140"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="150" height="140"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -123,6 +123,7 @@
                                         </imageView>
                                     </subviews>
                                 </view>
+                                <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="16" bottom="8" trailing="16"/>
                                 <size key="customSize" width="150" height="140"/>
                                 <connections>
                                     <outlet property="imageCell" destination="ZTn-yt-vyB" id="LJA-3j-ksm"/>
@@ -135,6 +136,9 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Choose Image" id="aWf-f0-iJd"/>
+                    <connections>
+                        <outlet property="imageCollectionView" destination="pDH-v9-ksx" id="br4-fl-WTb"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7YE-DU-5QU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

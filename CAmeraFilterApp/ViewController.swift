@@ -9,16 +9,18 @@ import UIKit
 import RxSwift
 
 class ViewController: UIViewController {
-
+    let disposeBag = DisposeBag()
+    
     @IBOutlet weak var image: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
       
     }
 
-    @IBAction func addImage(_ sender: Any) {
+ /*   @IBAction func addImage(_ sender: Any) {
         imagePicker()
-    }
+    }*/
     @IBAction func applyFilter(_ sender: Any) {
     }
     
@@ -46,5 +48,30 @@ extension ViewController:UIImagePickerControllerDelegate,UINavigationControllerD
         image.image = img as? UIImage
         self.dismiss(animated: true,completion: nil)
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let navC = segue.destination as? UINavigationController,
+              let photosCVC = navC.viewControllers.first as? ImageCollectionViewController
+        else {
+            fatalError("ERROR")
+        }
+        photosCVC.selectedImage.subscribe { [weak self] photo in
+            self?.image.image = photo
+        }.disposed(by: disposeBag)
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
