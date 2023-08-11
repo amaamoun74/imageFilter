@@ -11,17 +11,35 @@ import RxSwift
 class ViewController: UIViewController {
     let disposeBag = DisposeBag()
     
+    @IBOutlet weak var applyFilterBtn: UIButton!
     @IBOutlet weak var image: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
       
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        if image.image != nil {
+            applyFilterBtn.isHidden = false
+        }
+        else
+        {
+            applyFilterBtn.isHidden = true
+        }
+    }
  /*   @IBAction func addImage(_ sender: Any) {
         imagePicker()
     }*/
     @IBAction func applyFilter(_ sender: Any) {
+        guard let sourceImage = self.image.image else {
+            return
+        }
+        ImageFilte().applyFilter(to: sourceImage)
+            .subscribe { filterdIMage in
+                DispatchQueue.main.async {
+                    self.image.image = filterdIMage
+                }
+            }.disposed(by: disposeBag)
     }
     
 }
@@ -55,23 +73,15 @@ extension ViewController:UIImagePickerControllerDelegate,UINavigationControllerD
             fatalError("ERROR")
         }
         photosCVC.selectedImage.subscribe { [weak self] photo in
-            self?.image.image = photo
+            DispatchQueue.main.async {
+                self?.updateUI(with: photo)
+            }
         }.disposed(by: disposeBag)
     }
+    
+    private func updateUI(with image: UIImage){
+        self.image.image = image
+        self.applyFilterBtn.isHidden = false
+    }
+    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
