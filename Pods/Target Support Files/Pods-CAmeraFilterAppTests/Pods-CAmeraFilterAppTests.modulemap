@@ -1,0 +1,6 @@
+framework module Pods_CAmeraFilterAppTests {
+  umbrella header "Pods-CAmeraFilterAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
